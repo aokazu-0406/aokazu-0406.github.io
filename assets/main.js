@@ -9,7 +9,12 @@
   const hero = document.querySelector('.hero');
   const progress = document.querySelector('.reading-progress');
   const layers = [...document.querySelectorAll('[data-parallax]')];
-  const tiltCards = [...document.querySelectorAll('[data-work-tilt]')];
+  const tiltCards = [...document.querySelectorAll('[data-tilt-panel]')];
+  const fieldEntries = [...document.querySelectorAll('[data-field]')];
+  const diagrams = [...document.querySelectorAll('[data-diagram]')];
+  const scenes = [...document.querySelectorAll('.motion-scene')];
+  const trackedSections = [...document.querySelectorAll('.approach, .history')];
+  const heroArt = document.querySelector('.hero-art');
   const sections = [...document.querySelectorAll('main > section[id]')];
   const navLinks = [...document.querySelectorAll('.site-nav a')];
   let manuallyReduced = false;
@@ -55,6 +60,11 @@
     const y = window.scrollY;
     const max = root.scrollHeight - innerHeight;
     progress.style.transform = `scaleX(${max > 0 ? Math.min(1, Math.max(0, y / max)) : 0})`;
+    trackedSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const amount = Math.min(1, Math.max(0, (innerHeight * .8 - rect.top) / Math.min(rect.height, innerHeight * .85)));
+      section.style.setProperty('--section-progress', reduced ? '1' : amount.toFixed(3));
+    });
     if (!reduced && desktop.matches && y < heroHeight + headerHeight) {
       layers.forEach(el => { el.style.transform = `translate3d(0,${Math.min(y, heroHeight) * Number(el.dataset.parallax)}px,0)`; });
     }
@@ -81,11 +91,44 @@
     layers.forEach(el => { el.style.transform = ''; });
     if (!reduced && finePointer.matches) {
       if (window.Lenis) lenis = new window.Lenis({ autoRaf:true, lerp:0.09, smoothWheel:true, syncTouch:false, anchors:false });
-      if (window.VanillaTilt) window.VanillaTilt.init(tiltCards, { max:3.5, speed:500, perspective:1100, scale:1, glare:false, gyroscope:false });
+      if (window.VanillaTilt) window.VanillaTilt.init(tiltCards, { max:4, speed:600, perspective:1400, scale:1, glare:false, gyroscope:false });
     }
     setupReveals();
     requestUpdate();
   }
+
+  diagrams.forEach(diagram => {
+    diagram.querySelectorAll('path:not(.construction),rect,circle').forEach(shape => shape.setAttribute('pathLength', '1'));
+  });
+  const fieldNames = ['App development', 'Motion & film', '3D CAD design', 'Generative art', 'Brand & identity', 'PC & hardware'];
+  fieldEntries.forEach(entry => {
+    entry.addEventListener('toggle', () => {
+      if (!entry.open) return;
+      fieldEntries.forEach(other => { if (other !== entry) other.open = false; });
+      const index = Number(entry.dataset.field);
+      diagrams.forEach(diagram => diagram.classList.toggle('is-active', Number(diagram.dataset.diagram) === index));
+      document.querySelector('.stage-count').textContent = `0${index + 1} / 06`;
+      document.querySelector('.stage-name').textContent = fieldNames[index];
+      requestUpdate();
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    const sceneObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.classList.toggle('is-inview', entry.isIntersecting));
+    }, { threshold:0 });
+    scenes.forEach(scene => sceneObserver.observe(scene));
+  } else scenes.forEach(scene => scene.classList.add('is-inview'));
+  document.addEventListener('visibilitychange', () => root.classList.toggle('page-hidden', document.hidden));
+  heroArt.addEventListener('pointermove', event => {
+    if (reduced || !finePointer.matches) return;
+    const rect = heroArt.getBoundingClientRect();
+    heroArt.style.setProperty('--pointer-x', `${((event.clientX - rect.left) / rect.width - .5) * 16}px`);
+    heroArt.style.setProperty('--pointer-y', `${((event.clientY - rect.top) / rect.height - .5) * 12}px`);
+  });
+  heroArt.addEventListener('pointerleave', () => {
+    heroArt.style.setProperty('--pointer-x', '0px');
+    heroArt.style.setProperty('--pointer-y', '0px');
+  });
 
   // Preserve native hashes/history and put keyboard focus at the destination.
   document.querySelectorAll('a[href^="#"]').forEach(link => {
