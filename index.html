@@ -1,389 +1,100 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VF0M4VJFGY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VF0M4VJFGY');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>aoyagi design｜青柳和貴</title>
-<meta name="description" content="aoyagi design は青柳和貴による個人デザイン工房です。アプリ開発・動画編集・3D CAD・ジェネラティブアート・ブランドデザインまで、コードと図面の両方でかたちをつくっています。">
-<meta property="og:title" content="aoyagi design｜青柳和貴">
-<meta property="og:description" content="コードと図面のあいだで、かたちをつくる。青柳和貴の個人デザイン工房 aoyagi design。">
-<meta property="og:image" content="logo.png">
-<meta property="og:type" content="website">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Lora:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-  /* ============================================
-     TOKENS
-     色は配布いただいたロゴから抽出した実際の色値です。
-     ============================================ */
-  :root{
-    --paper:      #FAF7F1; /* 図面用紙のようなクリーム地 */
-    --ink:        #2A2924; /* 本文用の暖かいほぼ黒 */
-    --navy:       #34537D; /* ロゴタイプと同じネイビー */
-    --navy-deep:  #1F3350; /* 濃色セクション・ホバー用 */
-    --taupe:      #B0AC90; /* ロゴの線画と同じ淡いカーキ */
-    --taupe-soft: #EFEBDE; /* カード地・淡い塗り */
-
-    --font-display: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-    --font-body:    'Zen Kaku Gothic New', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-    --font-accent:  'Lora', Georgia, serif;
-    --font-mono:    'Space Mono', 'SF Mono', Consolas, monospace;
-
-    --wrap: min(1120px, 92vw);
-  }
-
-  /* ============================================
-     RESET / BASE
-     ============================================ */
-  *,*::before,*::after{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background-color:var(--paper);
-    background-image:
-      repeating-linear-gradient(0deg,  rgba(176,172,144,.06) 0, rgba(176,172,144,.06) 1px, transparent 1px, transparent 42px),
-      repeating-linear-gradient(90deg, rgba(176,172,144,.06) 0, rgba(176,172,144,.06) 1px, transparent 1px, transparent 42px);
-    color:var(--ink);
-    font-family:var(--font-body);
-    font-size:16px;
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-  h1,h2,h3,p,ul,figure{ margin:0; }
-  ul{ list-style:none; padding:0; }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-  .wrap{ width:var(--wrap); margin-inline:auto; }
-  :focus-visible{ outline:2px solid var(--navy); outline-offset:3px; }
-
-  .skip-link{
-    position:absolute; left:-999px; top:0;
-    background:var(--navy); color:#fff;
-    padding:.8rem 1.4rem; font-family:var(--font-mono); font-size:.8rem;
-    z-index:200;
-  }
-  .skip-link:focus{ left:1rem; top:1rem; }
-
-  /* ============================================
-     HEADER
-     ============================================ */
-  .site-header{
-    position:sticky; top:0; z-index:100;
-    background:rgba(250,247,241,.85);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(176,172,144,.45);
-  }
-  .header-inner{
-    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
-    gap:.5rem 1.5rem;
-    padding-block:1.1rem;
-  }
-  .brand{
-    font-family:var(--font-accent);
-    font-style:italic; font-weight:600;
-    font-size:clamp(1.05rem, .9rem + .5vw, 1.3rem);
-    color:var(--navy);
-    letter-spacing:.01em;
-  }
-  .site-nav{ display:flex; gap:clamp(1rem, 3vw, 2.2rem); }
-  .site-nav a{
-    font-family:var(--font-mono);
-    font-size:.72rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    position:relative;
-    padding-bottom:5px;
-  }
-  .site-nav a::after{
-    content:''; position:absolute; left:0; bottom:0;
-    width:0; height:1px; background:var(--navy);
-    transition:width .3s ease;
-  }
-  .site-nav a:hover::after,
-  .site-nav a:focus-visible::after{ width:100%; }
-
-  /* ============================================
-     HERO
-     ============================================ */
-  .hero{
-    position:relative;
-    overflow:hidden;
-    padding-block: clamp(3.2rem, 9vw, 6.5rem) clamp(2.6rem, 7vw, 4.5rem);
-  }
-  .hero-bg{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    pointer-events:none;
-  }
-  .hero-bg svg{ width:min(680px, 82vw); height:auto; }
-  .compass-ring{
-    fill:none; stroke:var(--taupe); stroke-width:1;
-    stroke-dasharray:1571; stroke-dashoffset:1571;
-    animation:draw-ring 2s cubic-bezier(.4,0,.2,1) forwards .2s;
-  }
-  .compass-tick{
-    stroke:var(--taupe); stroke-width:1.4; stroke-linecap:round;
-    opacity:0; animation:tick-in .4s ease-out forwards;
-  }
-  .compass-dot{ fill:var(--taupe); opacity:0; animation:tick-in .35s ease-out forwards; }
-  .compass-tick:nth-of-type(1){ animation-delay:.6s; }
-  .compass-tick:nth-of-type(2){ animation-delay:.67s; }
-  .compass-tick:nth-of-type(3){ animation-delay:.74s; }
-  .compass-tick:nth-of-type(4){ animation-delay:.81s; }
-  .compass-tick:nth-of-type(5){ animation-delay:.88s; }
-  .compass-tick:nth-of-type(6){ animation-delay:.95s; }
-  .compass-tick:nth-of-type(7){ animation-delay:1.02s; }
-  .compass-tick:nth-of-type(8){ animation-delay:1.09s; }
-  @keyframes draw-ring{ to{ stroke-dashoffset:0; } }
-  @keyframes tick-in{ to{ opacity:1; } }
-
-  .hero-inner{
-    position:relative;
-    display:flex; flex-direction:column; align-items:center;
-    text-align:center; gap:1.4rem;
-  }
-  .kicker{
-    font-family:var(--font-mono); font-size:.72rem;
-    letter-spacing:.3em; text-transform:uppercase; color:var(--navy);
-  }
-  .hero-logo{ width:min(600px, 88vw); height:auto; margin-block:.4rem; }
-  .hero-tagline{
-    font-family:var(--font-display); font-weight:700;
-    font-size:clamp(1.5rem, 1.1rem + 2vw, 2.3rem);
-    color:var(--navy-deep); line-height:1.55;
-  }
-
-  /* ============================================
-     SECTIONS (shared)
-     ============================================ */
-  .section{
-    padding-block: clamp(3.6rem, 8vw, 6.2rem);
-    border-top:1px solid rgba(176,172,144,.45);
-  }
-  .eyebrow{
-    display:block;
-    font-family:var(--font-mono); font-size:.72rem;
-    letter-spacing:.18em; color:var(--navy);
-    margin-bottom:1.1rem;
-  }
-  .section h2{
-    font-family:var(--font-display); font-weight:700;
-    font-size:clamp(1.7rem, 1.3rem + 1.6vw, 2.3rem);
-    color:var(--ink);
-  }
-
-  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.is-visible{ opacity:1; transform:translateY(0); }
-
-  /* ============================================
-     PROFILE
-     ============================================ */
-  .profile-grid{ display:grid; grid-template-columns:1fr; gap:2.6rem; margin-top:1.8rem; }
-  .profile-heading h2{ font-size:clamp(2.1rem, 1.6rem + 2vw, 3rem); margin-bottom:.6rem; }
-  .role{
-    font-family:var(--font-accent); font-style:italic;
-    color:var(--navy); font-size:1rem; line-height:1.7;
-  }
-  .affiliation{
-    display:inline-flex; align-items:baseline; gap:.4rem;
-    margin-top:1.15rem;
-    padding:.5rem 1.05rem;
-    background:var(--taupe-soft);
-    border:1px solid var(--navy);
-    border-radius:999px;
-    font-family:var(--font-mono);
-    font-size:.8rem; letter-spacing:.01em;
-    color:var(--navy-deep);
-  }
-  .affiliation strong{ font-weight:700; }
-  .profile-body p{ max-width:56ch; margin-bottom:1.15rem; }
-  .profile-body p:last-of-type{ margin-bottom:0; }
-
-  .tag-list{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.7rem; }
-  .tag-list li{
-    border:1px solid var(--taupe); border-radius:999px;
-    padding:.45rem 1.05rem;
-    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.02em;
-    color:var(--navy-deep);
-    transition:background-color .25s ease, border-color .25s ease;
-  }
-  .tag-list li:hover{ background:var(--taupe-soft); border-color:var(--navy); }
-
-  @media (min-width:820px){
-    .profile-grid{ grid-template-columns:.85fr 1.35fr; gap:4.5rem; align-items:start; }
-  }
-
-  /* ============================================
-     HISTORY
-     ============================================ */
-  .history h2{ margin-bottom:2.4rem; }
-  .timeline{ position:relative; list-style:none; margin:0; padding:0; }
-  .timeline::before{
-    content:''; position:absolute; left:6px; top:.35rem; bottom:.35rem;
-    width:1px; background:var(--taupe);
-  }
-  .timeline-item{ position:relative; margin:0; padding-left:2.7rem; }
-  .timeline-item + .timeline-item{ margin-top:2.7rem; }
-  .timeline-marker{
-    display:block; position:absolute; left:0; top:.3rem;
-    width:13px; height:13px; border-radius:50%;
-    background:var(--paper); border:2px solid var(--navy);
-  }
-  .timeline-date{
-    font-family:var(--font-mono); font-size:.85rem;
-    letter-spacing:.05em; color:var(--navy); margin-bottom:.6rem;
-  }
-  .timeline-item p{ max-width:58ch; }
-  .timeline-works{ display:flex; flex-direction:column; gap:.5rem; margin-top:1rem; }
-  .timeline-works a{
-    display:inline-flex; align-items:baseline; gap:.55rem; width:fit-content;
-    font-family:var(--font-mono); font-size:.78rem; letter-spacing:.01em;
-    border-bottom:1px solid var(--taupe); padding-bottom:2px;
-    transition:border-color .25s ease, color .25s ease;
-  }
-  .timeline-works a:hover{ color:var(--navy); border-color:var(--navy); }
-  .timeline-works .play{ color:var(--navy); font-size:.68em; }
-
-  /* ============================================
-     FIELDS
-     ============================================ */
-  .fields h2{ margin-bottom:2rem; }
-  .field-grid{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
-    gap:1.6rem;
-  }
-  .field-card{
-    padding:1.9rem 1.7rem;
-    background:var(--taupe-soft);
-    border-radius:3px;
-    transition:transform .3s ease, box-shadow .3s ease;
-  }
-  .field-card:hover{ transform:translateY(-5px); box-shadow:0 14px 28px -16px rgba(31,51,80,.35); }
-  .field-icon{ width:34px; height:34px; color:var(--navy); margin-bottom:1.1rem; }
-  .field-card h3{
-    font-family:var(--font-display); font-weight:700;
-    font-size:1.05rem; color:var(--navy-deep); margin-bottom:.55rem;
-  }
-  .field-card p{ font-size:.88rem; line-height:1.75; }
-
-  .field-grid .field-card:nth-child(1){ transition-delay:0s; }
-  .field-grid .field-card:nth-child(2){ transition-delay:.07s; }
-  .field-grid .field-card:nth-child(3){ transition-delay:.14s; }
-  .field-grid .field-card:nth-child(4){ transition-delay:.21s; }
-  .field-grid .field-card:nth-child(5){ transition-delay:.28s; }
-  .field-grid .field-card:nth-child(6){ transition-delay:.35s; }
-
-  /* ============================================
-     CONTACT
-     ============================================ */
-  .contact-inner{ text-align:center; max-width:640px; margin-inline:auto; }
-  .contact-inner h2{ margin-bottom:.9rem; }
-  .contact-lead{ color:var(--ink); }
-  .contact-list{
-    display:flex; justify-content:center; flex-wrap:wrap;
-    gap:1.8rem 2.4rem; margin-top:2rem;
-  }
-  .contact-list a{
-    font-family:var(--font-mono); font-size:.85rem; letter-spacing:.04em;
-    border-bottom:1px solid var(--taupe); padding-bottom:3px;
-    transition:border-color .25s ease, color .25s ease;
-  }
-  .contact-list a:hover{ color:var(--navy); border-color:var(--navy); }
-
-  /* ============================================
-     FOOTER
-     ============================================ */
-  .site-footer{ background:var(--navy-deep); color:var(--taupe-soft); }
-  .footer-inner{
-    padding-block:2.6rem;
-    display:flex; flex-direction:column; align-items:center; gap:.5rem;
-    text-align:center;
-    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.04em;
-  }
-  .footer-brand{
-    font-family:var(--font-accent); font-style:italic; font-weight:600;
-    font-size:1rem; color:#fff; margin-bottom:.3rem;
-  }
-  .footer-inner a{ color:var(--taupe-soft); }
-  .footer-inner a:hover{ color:#fff; }
-
-  /* ============================================
-     MOTION / ACCESSIBILITY
-     ============================================ */
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    .reveal{ opacity:1; transform:none; transition:none; }
-    .compass-ring{ animation:none; stroke-dashoffset:0; }
-    .compass-tick, .compass-dot{ animation:none; opacity:1; }
-  }
-
-  @media (max-width:420px){
-    .site-nav{ gap:.7rem .9rem; }
-    .site-nav a{ font-size:.66rem; letter-spacing:.06em; }
-    .brand{ font-size:1rem; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf7f1">
+  <title>aoyagi design｜青柳和貴</title>
+  <meta name="description" content="コードと図面のあいだで、かたちをつくる。青柳和貴の個人デザイン工房。アプリ開発・動画編集・3D CAD・ジェネラティブアート・ブランドデザインの制作と記録。">
+  <link rel="canonical" href="https://www.aoyagi-design.com/">
+  <meta property="og:title" content="aoyagi design｜青柳和貴">
+  <meta property="og:description" content="コードと図面のあいだで、かたちをつくる。青柳和貴の制作と記録。">
+  <meta property="og:image" content="https://www.aoyagi-design.com/logo.png">
+  <meta property="og:url" content="https://www.aoyagi-design.com/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=gambetta@400,401&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/atelier.css">
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <script src="assets/vendor/vanilla-tilt.min.js" defer></script>
+  <script src="assets/main.js" defer></script>
+  <script>
+    // Keep preview visits out of production analytics.
+    if (['aoyagi-design.com', 'www.aoyagi-design.com', 'aokazu-0406.github.io'].includes(location.hostname)) {
+      const tag = document.createElement('script');
+      tag.async = true;
+      tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-VF0M4VJFGY';
+      document.head.append(tag);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date()); gtag('config', 'G-VF0M4VJFGY');
+    }
+  </script>
 </head>
 <body>
-
-<a class="skip-link" href="#profile">本文へスキップ</a>
-
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="#top">aoyagi design</a>
-    <nav class="site-nav" aria-label="サイト内ナビゲーション">
-      <a href="#profile">Profile</a>
-      <a href="#history">History</a>
-      <a href="#fields">Fields</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true">
-      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <circle class="compass-ring" cx="300" cy="300" r="250"/>
-        <circle class="compass-dot" cx="300" cy="300" r="3"/>
-        <line class="compass-tick" x1="300" y1="50"  x2="300" y2="32"/>
-        <line class="compass-tick" x1="477" y1="123" x2="490" y2="111"/>
-        <line class="compass-tick" x1="550" y1="300" x2="568" y2="300"/>
-        <line class="compass-tick" x1="477" y1="477" x2="490" y2="490"/>
-        <line class="compass-tick" x1="300" y1="550" x2="300" y2="568"/>
-        <line class="compass-tick" x1="123" y1="477" x2="111" y2="490"/>
-        <line class="compass-tick" x1="50"  y1="300" x2="32"  y2="300"/>
-        <line class="compass-tick" x1="123" y1="123" x2="111" y2="111"/>
-      </svg>
+  <a class="skip-link" href="#approach">本文へスキップ</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="aoyagi design トップへ">aoyagi design<span class="brand-dot" aria-hidden="true">.</span></a>
+      <nav class="site-nav" aria-label="サイト内ナビゲーション">
+        <a href="#approach">Approach</a><a href="#profile">Profile</a><a href="#fields">Fields</a><a href="#history">History</a><a href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="motion-toggle" type="button" aria-pressed="false" hidden>動きを抑える</button>
     </div>
-
-    <div class="wrap hero-inner">
-      <p class="kicker">Design &amp; Code Atelier</p>
-      <img class="hero-logo" src="logo.png" alt="aoyagi design のロゴ。山羊と、鉛筆・定規・コンパス・ノートなど製図道具の線画イラストに、ネイビーのロゴタイプ「aoyagi design」が重なっている。" width="1400" height="769">
-      <p class="hero-tagline">コードと図面のあいだで、かたちをつくる。</p>
-    </div>
-  </section>
-
-  <!-- ============ PROFILE ============ -->
-  <section class="section profile" id="profile">
+    <div class="reading-progress" aria-hidden="true"></div>
+  </header>
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-register"><span>DESIGN &amp; CODE ATELIER</span><span>PORTFOLIO / KAZUKI AOYAGI</span></div>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="hero-edition">Ideas, drawn into life.</p>
+            <h1 id="hero-title"><span class="title-line"><span>コードと図面の</span></span><span class="title-line"><span>あいだで、</span></span><span class="title-line"><span>かたちをつくる。</span></span></h1>
+            <p class="hero-description">画面の中から、手にとれるものまで。<br>領域を越えて考え、細部までつくる。</p>
+            <a class="text-link hero-link" href="#fields">制作領域を見る <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-art motion-scene">
+            <div class="draft-orbit" data-parallax="0.09" aria-hidden="true">
+              <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="draw-ring" cx="300" cy="300" r="255" pathLength="1"/>
+                <circle class="orbit-sweep" cx="300" cy="300" r="239" stroke-dasharray="120 1382"/>
+                <circle class="orbit-inner" cx="300" cy="300" r="222"/>
+                <path d="M300 27v37M300 536v37M27 300h37M536 300h37M105 105l18 18M477 477l18 18M105 495l18-18M477 123l18-18"/>
+                <path class="draft-axis" d="M300 70v460M70 300h460"/>
+              </svg>
+            </div>
+            <div class="logo-plane" data-parallax="-0.035"><img class="hero-logo" src="logo.png" width="1400" height="769" fetchpriority="high" alt="山羊と製図道具の線画に重なる aoyagi design のロゴ"></div>
+            <span class="draft-caption draft-caption-top">PL. 01 / ATELIER</span>
+            <span class="draft-caption draft-caption-bottom">CODE × CRAFT</span>
+            <span class="draft-cross cross-top" aria-hidden="true">+</span><span class="draft-cross cross-bottom" aria-hidden="true">+</span>
+          </div>
+        </div>
+        <div class="hero-bottom"><span>Digital thinking. Tangible making.</span><a href="#approach">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
+      </div>
+    </section>
+    <section class="section approach" id="approach" aria-labelledby="approach-title">
+      <div class="wrap approach-layout">
+        <div class="approach-heading reveal"><span class="eyebrow">Fig. 01 — Approach</span><p class="editorial-word">A little curiosity.<br><em>A lot of making.</em></p></div>
+        <div class="approach-copy reveal"><h2 id="approach-title">気づきを、<br>つくるきっかけに。</h2><p>日常の「もう少しこうだったら」から、ものづくりは始まります。<br>コードを書いたり、図面を引いたり。考えたことを、少しずつかたちにしていきます。</p><p>試して、見直して、またつくる。<br>その積み重ねと、細部まで向き合う時間を大切にしています。</p></div>
+        <ol class="process-line" aria-label="制作で大切にしていること">
+          <li class="reveal"><span class="process-no">01</span><span class="process-word">Observe</span><span>気づく。</span></li>
+          <li class="reveal"><span class="process-no">02</span><span class="process-word">Explore</span><span>試してみる。</span></li>
+          <li class="reveal"><span class="process-no">03</span><span class="process-word">Refine</span><span>細部を磨く。</span></li>
+        </ol>
+      </div>
+    </section>
+    <section class="section profile" id="profile">
     <div class="wrap">
-      <span class="eyebrow reveal">Fig. 01 — Profile</span>
+      <span class="eyebrow reveal">Fig. 02 — Profile</span>
 
       <div class="profile-grid">
         <div class="profile-heading reveal">
@@ -411,11 +122,50 @@
       </div>
     </div>
   </section>
-
-  <!-- ============ HISTORY ============ -->
-  <section class="section history" id="history">
+    <section class="section fields" id="fields" aria-labelledby="fields-title">
+      <div class="wrap">
+        <div class="section-heading reveal"><div><span class="eyebrow">Fig. 03 — Fields of work</span><h2 id="fields-title">つくる、その広がり。</h2></div><p class="section-intro">デジタルと、フィジカルと。<br>それぞれの学びが、次の制作につながる。</p></div>
+        <div class="fields-layout">
+          <div class="field-stage-wrap"><div class="field-stage motion-scene" data-tilt-panel>
+            <div class="stage-register"><span>FIELD NOTES</span><span class="stage-count">01 / 06</span></div>
+            <svg class="field-drawing" viewBox="0 0 400 350" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="field-diagram is-active" data-diagram="0" aria-hidden="true"><rect x="131" y="54" width="138" height="230" rx="17"/><path d="M175 67h50M184 270h32"/><rect x="145" y="88" width="110" height="61" rx="4"/><path d="m162 118 10 10 22-23M210 109h29M210 122h20"/><rect class="diagram-slide" x="145" y="164" width="110" height="35" rx="3"/><path d="M158 177h50M158 187h31M145 215h110M145 229h76M145 243h90"/><path class="construction" d="M110 54H78v230h32M74 54h8M74 284h8M131 304v20h138v-20"/></g>
+<g class="field-diagram" data-diagram="1" aria-hidden="true"><rect x="69" y="56" width="262" height="159" rx="3"/><path d="m184 105 43 30-43 30z"/><path class="construction" d="M69 79h262M69 192h262M90 56v23M112 56v23M134 56v23M288 56v23M310 56v23"/><path d="M69 242h262M69 270h262M69 298h262"/><rect x="84" y="230" width="92" height="21"/><rect x="190" y="258" width="118" height="21"/><path class="diagram-playhead" d="M157 221v92m-6-92h12l-6 8z"/><path d="m84 294 10-7 10 17 10-13 10 10 10-12 10 10 10-7"/></g>
+<g class="field-diagram" data-diagram="2" aria-hidden="true"><g class="diagram-lift"><path d="m91 100 108-52 110 52-110 54zM91 100v19l108 54 110-54v-19M199 154v19"/><ellipse cx="199" cy="103" rx="38" ry="19"/></g><path d="m91 189 108-53 110 53-110 55zM91 189v53l108 55 110-55v-53M199 244v53"/><ellipse cx="199" cy="190" rx="38" ry="19"/><path class="construction" d="M91 119v70M309 119v70M199 173v17M327 189h26v108h-26M91 310v17h218v-17"/></g>
+<g class="field-diagram" data-diagram="3" aria-hidden="true"><g class="diagram-orbits"><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(0 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(20 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(40 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(60 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(80 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(100 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(120 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(140 200 177)"/><ellipse cx="200" cy="177" rx="116" ry="48" transform="rotate(160 200 177)"/></g><circle cx="200" cy="177" r="6"/><path class="construction" d="M50 177h300M200 27v300M66 43h22M77 32v22M312 311h22M323 300v22"/></g>
+<g class="field-diagram" data-diagram="4" aria-hidden="true"><path class="construction" d="M67 88h266M67 241h266M99 57v215M302 57v215M67 164h266"/><circle cx="185" cy="164" r="76"/><circle cx="185" cy="164" r="43"/><path d="M261 88v153h42M261 88h-76M109 164v77"/><path class="diagram-pen" d="m280 64 26-27 14 14-27 26-20 6zM306 37l14 14"/><rect x="107" y="292" width="49" height="17" fill="currentColor"/><rect x="175" y="292" width="49" height="17" fill="currentColor" opacity=".5"/><rect x="243" y="292" width="49" height="17" fill="currentColor" opacity=".2"/></g>
+<g class="field-diagram" data-diagram="5" aria-hidden="true"><path d="m114 75 142-24 38 24v216l-143 21-37-21zM151 98l143-23M151 98v214M114 75l37 23"/><path d="M169 123h54v72h-54zM169 219h105v22H169zM169 254h64M258 102h17"/><g class="diagram-fan"><circle cx="255" cy="166" r="24"/><path d="M255 145c18 0 12 21 0 21M276 166c0 18-21 12-21 0M255 187c-18 0-12-21 0-21M234 166c0-18 21-12 21 0"/></g><path class="construction" d="M94 75H71v216h23M151 326v16l143-21v-16"/></g></svg>
+            <div class="stage-caption"><span class="stage-name">App development</span><span>DESIGN STUDY</span></div>
+          </div><p class="field-hint">各領域をひらくと、制作の考え方をご覧いただけます。</p></div>
+          <div class="field-list"><details class="field-entry reveal" data-field="0" open>
+            <summary><span class="field-index">01</span><span class="field-label"><span class="field-en">APP DEVELOPMENT</span><span class="field-name">Androidアプリ開発</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>使う人の動きから、考える。</h3><p>KotlinとJetpack Composeを使い、日々の操作を助けるアプリを設計・実装。画面のわかりやすさと、操作の流れを大切にしています。</p><span class="field-tools">Kotlin / Jetpack Compose</span></div>
+          </details>
+<details class="field-entry reveal" data-field="1">
+            <summary><span class="field-index">02</span><span class="field-label"><span class="field-en">MOTION & FILM</span><span class="field-name">動画編集</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>時間の流れに、表情をつける。</h3><p>カットのつながり、音のタイミング、文字の動き。ひとつずつ整えながら、伝えたいことが届く映像をつくります。</p><span class="field-tools">Premiere Pro / After Effects / YMM</span></div>
+          </details>
+<details class="field-entry reveal" data-field="2">
+            <summary><span class="field-index">03</span><span class="field-label"><span class="field-en">3D CAD & FABRICATION</span><span class="field-name">3D CAD設計</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>図面から、手にとれるかたちへ。</h3><p>Onshapeでパーツや筐体を設計し、寸法や組み立てを検討。画面上のモデルと実際の使い方を行き来しながら、精度を詰めていきます。</p><span class="field-tools">Onshape / 3D Printing / Python</span></div>
+          </details>
+<details class="field-entry reveal" data-field="3">
+            <summary><span class="field-index">04</span><span class="field-label"><span class="field-en">GENERATIVE ART</span><span class="field-name">ジェネラティブアート</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>計算の中に、偶然を見つける。</h3><p>Python、numpy、OpenCVで、線や色、質感を組み立てる。規則とゆらぎのあいだを探り、静止画からアニメーションへ表現を広げています。</p><span class="field-tools">Python / numpy / OpenCV</span></div>
+          </details>
+<details class="field-entry reveal" data-field="4">
+            <summary><span class="field-index">05</span><span class="field-label"><span class="field-en">BRAND & IDENTITY</span><span class="field-name">ブランド・ロゴデザイン</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>らしさを、ひとつの線から。</h3><p>ロゴタイプ、色、余白のバランスを整え、伝えたい印象をかたちに。ひとつのマークから、使う場面に広がる一貫性を考えます。</p><span class="field-tools">Typography / Logo / Color system</span></div>
+          </details>
+<details class="field-entry reveal" data-field="5">
+            <summary><span class="field-index">06</span><span class="field-label"><span class="field-en">PC BUILD & HARDWARE</span><span class="field-name">PC自作</span></span><span class="field-toggle" aria-hidden="true"></span></summary>
+            <div class="field-body"><h3>構成も、内部も、自分で考える。</h3><p>用途に合わせたパーツ選定から組み立てまで。CADによる筐体の検証も取り入れ、部品の収まりと全体の構成を考えます。</p><span class="field-tools">Parts selection / Assembly / CAD</span></div>
+          </details></div>
+        </div>
+      </div>
+    </section>
+    <section class="section history" id="history">
     <div class="wrap">
-      <span class="eyebrow reveal">Fig. 02 — History</span>
+      <span class="eyebrow reveal">Fig. 04 — History</span>
       <h2 class="reveal">経歴</h2>
 
       <ol class="timeline">
@@ -429,10 +179,6 @@
           <span class="timeline-marker" aria-hidden="true"></span>
           <p class="timeline-date">2022 — 13歳</p>
           <p>中学校の「ものづくり・PC部」に入部。デザインの基礎を学びながら動画編集も続け、中学2年・3年で「にいがたデジコングランプリ」動画部門 奨励賞を2年連続受賞。</p>
-          <div class="timeline-works">
-            <a href="https://youtu.be/DOSYp6EeAEY" target="_blank" rel="noopener noreferrer"><span class="play">▶</span>2023｜燕中学校ものづくり・PC部の紹介</a>
-            <a href="https://youtu.be/rMCiSMY3v-4" target="_blank" rel="noopener noreferrer"><span class="play">▶</span>2024｜新潟県のハピネスを中学生がランク付けしてみた！！</a>
-          </div>
         </li>
 
         <li class="timeline-item reveal">
@@ -443,122 +189,13 @@
       </ol>
     </div>
   </section>
-
-  <!-- ============ FIELDS ============ -->
-  <section class="section fields" id="fields">
-    <div class="wrap">
-      <span class="eyebrow reveal">Fig. 03 — Fields of work</span>
-      <h2 class="reveal">制作領域</h2>
-
-      <div class="field-grid">
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="6" y="8" width="24" height="20" rx="2"/>
-            <line x1="6" y1="14" x2="30" y2="14"/>
-            <circle cx="10" cy="11" r=".6" fill="currentColor"/>
-          </svg>
-          <h3>Androidアプリ開発</h3>
-          <p>Kotlin / Jetpack Composeで、実用的な自動化アプリを設計・実装。</p>
-        </article>
-
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="5" y="9" width="26" height="18" rx="2"/>
-            <path d="M15 14 L23 18 L15 22 Z" fill="currentColor" stroke="none"/>
-          </svg>
-          <h3>動画編集</h3>
-          <p>Adobe Premiere Pro・After EffectsやYukkuri Movie Makerで制作。「にいがたデジコングランプリ」動画部門 奨励賞を2年連続受賞。</p>
-        </article>
-
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 4 L30 10 L18 16 L6 10 Z"/>
-            <path d="M6 10 L6 26 L18 32 L18 16 Z"/>
-            <path d="M30 10 L30 26 L18 32 L18 16 Z"/>
-          </svg>
-          <h3>3D CAD設計</h3>
-          <p>Onshapeと自作のPythonエクスポータで、精密なパーツ・筐体モデルを制作。</p>
-        </article>
-
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 4 L21 15 L32 18 L21 21 L18 32 L15 21 L4 18 L15 15 Z"/>
-          </svg>
-          <h3>ジェネラティブアート</h3>
-          <p>numpyやOpenCVを用いた画像生成と、質感・アニメーション表現。</p>
-        </article>
-
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 6 L26 24 L18 30 L10 24 Z"/>
-            <line x1="18" y1="10" x2="18" y2="26"/>
-          </svg>
-          <h3>ブランド・ロゴデザイン</h3>
-          <p>ロゴタイプからカラーシステムまで、一貫したビジュアルアイデンティティを設計。</p>
-        </article>
-
-        <article class="field-card reveal">
-          <svg class="field-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="9" y="5" width="18" height="26" rx="2"/>
-            <line x1="13" y1="10" x2="13" y2="15"/>
-            <circle cx="22" cy="9.5" r=".9" fill="currentColor"/>
-          </svg>
-          <h3>PC自作</h3>
-          <p>パーツ選定から組み立て、CADによる筐体検証まで一貫して行う。</p>
-        </article>
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-inner">
+        <div><span class="eyebrow">Fig. 05 — Contact</span><p class="contact-english">Let’s make<br><em>something.</em></p></div>
+        <div class="contact-detail"><h2 id="contact-title">お問い合わせ</h2><p>お問い合わせ窓口は、ただいま準備中です。<br>公開まで、もうしばらくお待ちください。</p><span class="contact-status"><span aria-hidden="true"></span>準備中</span></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="section contact" id="contact">
-    <div class="wrap contact-inner">
-      <span class="eyebrow reveal">Fig. 04 — Contact</span>
-      <h2 class="reveal">お問い合わせ</h2>
-      <p class="contact-lead reveal">お仕事のご相談やご質問など、お気軽にご連絡ください。</p>
-
-      <!-- ▼ 編集ポイント：ご自身の連絡先・SNSリンクに差し替えてください ▼ -->
-      <ul class="contact-list reveal">
-        <li><a href="mailto:your-mail@example.com">Mail</a></li>
-        <li><a href="#">X (Twitter)</a></li>
-        <li><a href="#">Instagram</a></li>
-      </ul>
-      <!-- ▲ 編集ポイントここまで ▲ -->
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <p class="footer-brand">aoyagi design</p>
-    <p>© 2026 Kazuki Aoyagi</p>
-    <a href="#top">↑ Top</a>
-  </div>
-</footer>
-
-<script>
-(function(){
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealEls = document.querySelectorAll('.reveal');
-
-  if(reduceMotion || !('IntersectionObserver' in window)){
-    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
-    return;
-  }
-
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold:.15, rootMargin:'0px 0px -40px 0px' });
-
-  revealEls.forEach(function(el){ observer.observe(el); });
-})();
-</script>
-
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="footer-brand" href="#top">aoyagi design.</a><p>© 2026 Kazuki Aoyagi</p><a class="back-top" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div></footer>
 </body>
 </html>
